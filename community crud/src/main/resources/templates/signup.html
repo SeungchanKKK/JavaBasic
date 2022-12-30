@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/Style.css">
+    <meta charset="UTF-8">
+    <title>회원가입 페이지</title>
+    <script>
+        function onclickAdmin() {
+// Get the checkbox
+            var checkBox = document.getElementById("admin-check");
+// Get the output text
+            var box = document.getElementById("admin-token");
+
+// If the checkbox is checked, display the output text
+            if (checkBox.checked == true){
+                box.style.display = "block";
+            } else {
+                box.style.display = "none";
+            }
+        }
+
+        function signUp() {
+            let username= $('#username').val();
+            let password= $('#password').val();
+            let passwordCheck= $('#passwordCheck').val();
+            let data={"username":username,
+                "password":password,
+                "passwordCheck":passwordCheck}
+
+            $.ajax({
+                type: "POST",
+                url: "/user/signup",
+                contentType: "application/json", // JSON 형식으로 전달함을 알리기
+                data: JSON.stringify(data),
+                success: function (response) {
+                    if(response=="회원가입완료!"){
+                        alert(response)
+                        window.location.href="/user/login"
+                    }
+                    else {
+                        alert(response)
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+<div id="login-form">
+    <div id="login-title">Sign up Select Shop</div>
+    <div class="login-id-label">Username</div>
+    <input type="text" id="username" placeholder="Username" class="login-input-box">
+
+    <div class="login-id-label">Password</div>
+    <input type="password" id="password" class="login-input-box">
+
+    <div class="login-id-label">Password Check</div>
+    <input type="password" id="passwordCheck" class="login-input-box">
+
+    <button id="login-id-submit" onclick="signUp()">회원 가입</button>
+</div>
+</body>
+</html>
