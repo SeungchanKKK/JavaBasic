@@ -15,6 +15,7 @@ public class MemoController {
     private final MemoRepository memoRepository;
     private final MemoService memoService;
 
+    //메모작성
     @PostMapping("/api/memos")
     public String createMemo(@RequestBody MemoRequestDto requestDto, @RequestHeader(value = "token", defaultValue = "token") String token){
         return memoService.post(requestDto,token);
