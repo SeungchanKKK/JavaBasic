@@ -14,7 +14,7 @@ import java.util.Optional;
 @Controller
 public class HomeController {
     private final UserController userController;
-
+    //메인화면 닉네임 등록로직
     @GetMapping("/")
     public String home(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails, HttpSession httpSession) {
         String user= (String) httpSession.getAttribute("username");
